@@ -23,7 +23,7 @@
       <term name="anonymous" form="short">o. A.</term>
       <term name="no date" form="short">o. J.</term>
       <term name="et-al">et al.</term>
-      <term name="editor" form="short">Hrg.</term>
+      <term name="editor" form="short">Hrsg.</term>
       <term name="presented at">präsentiert auf</term>
     </terms>
   </locale>
@@ -264,8 +264,8 @@
         <text macro="container-title"/>
         <text macro="edition" suffix="."/>
         <text macro="genre"/>
-        <text macro="publisher" suffix="."/>
         <group delimiter=", " suffix=".">
+          <text macro="publisher"/>
           <choose>
             <if type="article-journal">
               <group>
