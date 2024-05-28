@@ -37,41 +37,24 @@
     <text term="anonymous" form="short"/>
   </macro>
   <macro name="author">
-    <choose>
-      <if type="entry-dictionary" match="any">
-        <group delimiter=" ">
-          <text variable="title"/>
-          <text value="="/>
-        </group>
-      </if>
-      <else>
-        <names variable="author" delimiter="/">
-          <name delimiter="/" delimiter-precedes-et-al="never" delimiter-precedes-last="always" name-as-sort-order="all"/>
-          <label form="short" prefix=" (" suffix=")"/>
-          <substitute>
-            <text macro="editor"/>
-            <text macro="anon"/>
-          </substitute>
-        </names>
-      </else>
-    </choose>
+	<names variable="author" delimiter="/">
+	  <name delimiter="/" delimiter-precedes-et-al="never" delimiter-precedes-last="always" name-as-sort-order="all"/>
+	  <label form="short" prefix=" (" suffix=")"/>
+	  <substitute>
+	    <text macro="editor"/>
+	    <text macro="anon"/>
+	  </substitute>
+	</names>
   </macro>
   <macro name="author-short">
-    <choose>
-      <if type="entry-dictionary" match="any">
-        <text variable="title"/>
-      </if>
-      <else>
-        <names variable="author" delimiter="/">
-          <name form="short" delimiter="/" initialize-with=". " delimiter-precedes-last="always"/>
-          <substitute>
-            <names variable="editor"/>
-            <names variable="translator"/>
-            <text macro="anon"/>
-          </substitute>
-        </names>
-      </else>
-    </choose>
+    <names variable="author" delimiter="/">
+      <name form="short" delimiter="/" initialize-with=". " delimiter-precedes-last="always"/>
+      <substitute>
+        <names variable="editor"/>
+        <names variable="translator"/>
+        <text macro="anon"/>
+      </substitute>
+    </names>
   </macro>
  <macro name="access">
   <choose>
@@ -79,8 +62,8 @@
       <text value="Online unter: "/>
       <text variable="URL"/>
       <date variable="accessed" prefix=" (konsultiert am " suffix=")">
-        <date-part name="day" form="numeric" suffix="."/>
-        <date-part name="month" form="numeric" suffix="."/>
+        <date-part name="day" form="numeric-leading-zeros" suffix="."/>
+        <date-part name="month" form="numeric-leading-zeros" suffix="."/>
         <date-part name="year" form="long"/>
       </date>
     </if>
@@ -96,7 +79,10 @@
         <text variable="title" text-case="title" font-style="italic"/>
         <text variable="number-of-volumes" prefix=", " suffix=" Bände"/>
       </else-if>
-      <else-if type="book" match="any">
+      <else-if type="book thesis" match="any">
+        <text variable="title" text-case="title" font-style="italic"/>
+      </else-if>
+      <else-if variable="URL" match="any">
         <text variable="title" text-case="title" font-style="italic"/>
       </else-if>
       <else>
@@ -108,10 +94,15 @@
     <choose>
       <if type="report" match="any">
         <group suffix=".">
-          <text variable="genre" suffix=" "/>
+          <text variable="genre"/>
           <text variable="number"/>
         </group>
       </if>
+      <else-if type="thesis" match="any">
+        <group suffix=".">
+          <text variable="genre"/>
+        </group>
+      </else-if>
     </choose>
   </macro>
   <macro name="publisher">
@@ -128,11 +119,6 @@
             </else-if>
           </choose>
         </group>
-      </if>
-    </choose>
-    <choose>
-      <if type="entry-dictionary" match="any">
-        <text macro="year-date" prefix=", "/>
       </if>
     </choose>
   </macro>
@@ -172,7 +158,7 @@
   </macro>
   <macro name="container-prefix">
     <choose>
-      <if type="chapter article-journal article-newspaper article-magazine" match="any">
+      <if type="chapter article-journal article-newspaper article-magazine entry-dictionary entry-encyclopedia" match="any">
         <text term="in" text-case="capitalize-first" suffix=":"/>
       </if>
     </choose>
@@ -190,9 +176,9 @@
   </macro>
   <macro name="container-title">
     <choose>
-      <if type="chapter paper-conference entry-dictionary" match="any">
+      <if type="chapter paper-conference entry-dictionary entry-encyclopedia" match="any">
         <text macro="editor" suffix=":"/>
-        <group delimiter=", " prefix=" " suffix=".">
+        <group delimiter=". " prefix=" " suffix=".">
           <text variable="container-title" text-case="title" font-style="italic"/>
           <choose>
             <if variable="volume" match="all">
@@ -235,11 +221,7 @@
       <group delimiter=": ">
         <group delimiter=" ">
           <text macro="author-short"/>
-          <choose>
-            <if type="entry-dictionary" match="none">
-              <text macro="year-date"/>
-            </if>
-          </choose>
+          <text macro="year-date"/>
         </group>
         <text variable="locator"/>
       </group>
@@ -254,12 +236,8 @@
     <layout>
       <group delimiter=" " suffix=".">
         <text macro="author"/>
-        <choose>
-          <if type="entry-dictionary" match="none">
-            <text macro="year-date" prefix="(" suffix="):"/>
-            <text macro="title" suffix="."/>
-          </if>
-        </choose>
+        <text macro="year-date" prefix="(" suffix="):"/>
+        <text macro="title" suffix="."/>
         <text macro="container-prefix"/>
         <text macro="container-title"/>
         <text macro="edition" suffix="."/>
@@ -270,7 +248,7 @@
             <if type="article-journal">
               <group>
                 <text variable="volume"/>
-                <text variable="issue" prefix="(" suffix=")"/>
+                <text variable="issue" prefix=" (" suffix=")"/>
               </group>
             </if>
           </choose>
