@@ -55,41 +55,47 @@
         <text macro="anon"/>
       </substitute>
     </names>
-  </macro>
- <macro name="access">
+</macro>
+
+<macro name="access">
   <choose>
-    <if match="any" variable="URL">
-      <text value="Online unter: "/>
-      <text variable="URL"/>
-      <date variable="accessed" prefix=" (konsultiert am " suffix=")">
-        <date-part name="day" form="numeric-leading-zeros" suffix="."/>
-        <date-part name="month" form="numeric-leading-zeros" suffix="."/>
-        <date-part name="year" form="long"/>
-      </date>
+    <if match="all" variable="URL">
+      <choose>
+        <if match="any" type="webpage post-weblog post">
+          <text value="Online unter: "/>
+          <text variable="URL"/>
+          <date variable="accessed" prefix=" (konsultiert am " suffix=")">
+            <date-part name="day" form="numeric-leading-zeros" suffix="."/>
+            <date-part name="month" form="numeric-leading-zeros" suffix="."/>
+            <date-part name="year" form="long"/>
+          </date>
+        </if>
+      </choose>
     </if>
   </choose>
 </macro>
-  <macro name="title">
-    <choose>
-      <if type="book" variable="volume" match="all">
-        <text variable="title" text-case="title" font-style="italic"/>
-        <text variable="volume" form="short" prefix=", Bd. "/>
-      </if>
-      <else-if type="book" variable="number-of-volumes" match="all">
-        <text variable="title" text-case="title" font-style="italic"/>
-        <text variable="number-of-volumes" prefix=", " suffix=" Bände"/>
-      </else-if>
-      <else-if type="book thesis" match="any">
-        <text variable="title" text-case="title" font-style="italic"/>
-      </else-if>
-      <else-if variable="URL" match="any">
-        <text variable="title" text-case="title" font-style="italic"/>
-      </else-if>
-      <else>
-        <text variable="title" text-case="title"/>
-      </else>
-    </choose>
-  </macro>
+
+<macro name="title">
+  <choose>
+    <if type="book" variable="volume" match="all">
+      <text variable="title" text-case="title" font-style="italic"/>
+      <text variable="volume" form="short" prefix=", Bd. "/>
+    </if>
+    <else-if type="book" variable="number-of-volumes" match="all">
+      <text variable="title" text-case="title" font-style="italic"/>
+      <text variable="number-of-volumes" prefix=", " suffix=" Bände"/>
+    </else-if>
+    <else-if type="book thesis" match="any">
+      <text variable="title" text-case="title" font-style="italic"/>
+    </else-if>
+    <else-if variable="URL" match="any">
+      <text variable="title" text-case="title" font-style="italic"/>
+    </else-if>
+    <else>
+      <text variable="title" text-case="title"/>
+    </else>
+  </choose>
+</macro>
   <macro name="genre">
     <choose>
       <if type="report" match="any">
