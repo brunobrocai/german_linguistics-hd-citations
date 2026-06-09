@@ -22,6 +22,9 @@ In order to use the style, follow these steps:
     \addbibresource{your_bibliography.bib}
     ```
 
+## LaTeX Template
+The `template/` folder contains a ready-to-use LaTeX scaffold for an empirical Hausarbeit (title page, structured sections, numbered example environment). Copy its contents into a new project, **also copy `biblatex.cfg` from this repo's root** into the project directory (it is required for the citation style), fill in the title-page fields in `main.tex`, and compile with the `biber` backend.
+
 ## How to Contribute
 🤝 I welcome all contributions! Feel free to fork the repository, make your improvements, and submit a pull request.
 I am also happy about any feedback or suggestions you might have. Please feel free to open an issue or contact me directly via my [institute email](bruno.brocai@gs.uni-heidelberg.de).

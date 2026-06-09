@@ -1,0 +1,102 @@
+\input{styling.tex}
+
+% ===== Angaben für die Titelseite =====
+\newcommand{\universitaet}{Universität Heidelberg}
+\newcommand{\seminar}{Germanistisches Seminar}
+\newcommand{\semester}{Wintersemester JJJJ/JJJJ}
+\newcommand{\lehrveranstaltung}{Titel der Lehrveranstaltung}
+\newcommand{\dozent}{Prof. Dr. Name Nachname}
+\newcommand{\arbeitstitel}{Titel der Arbeit}
+\newcommand{\untertitel}{Untertitel der Arbeit}
+\newcommand{\autorname}{Vorname Nachname}
+\newcommand{\matrikelnr}{0000000}
+\newcommand{\studiengang}{Studiengang}
+\newcommand{\email}{vorname.nachname@stud.uni-heidelberg.de}
+\newcommand{\abgabedatum}{TT.MM.JJJJ}
+% ======================================
+
+\begin{document}
+
+\include{titlepage.tex}
+
+% Table of contents (without page nbr.)
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+% Anführungszeichen (Deutsch „…"):
+%   \enquote{Text}   ODER einfach   "Text"   (statt \glqq...\grqq)
+% Zitierbefehle:
+%   \autocite{key}        -> (Nachname Jahr)
+%   \autocite[123]{key}   -> (Nachname Jahr: 123)
+%   \textcite{key}        -> Nachname (Jahr)
+% Nummerierte Beispiele: die quoting-Umgebung wird automatisch fortlaufend
+% nummeriert -- (1), (2), ... \bspback{n} gibt die Nummer des n-ten Beispiels
+% vor dem aktuellen Zähler zurück (für Rückverweise im Fließtext).
+
+\setcounter{page}{1}
+
+\section{Einleitung}
+% Beginn der Seitenzählung! Thematische Einführung, Problemstellung,
+% Untersuchungsfrage und Ziel der Arbeit, zentrale These(n), Abgrenzung von
+% benachbarten Fragestellungen.
+\lipsum[1-2]
+
+
+\section{Theoretischer Rahmen}
+% Theoretische Konzepte aus der Forschungsliteratur, auf die zurückgegriffen
+% wird; kritische Diskussion verwandter Konzepte; Einführung der zentralen
+% Begriffe und der verwendeten Terminologie.
+\lipsum[3-4]
+
+
+\section{Korpus und Methode}
+% Zentraler Teil empirischer Hausarbeiten: Erläuterung der Datengrundlage,
+% fremdes oder eigenes Korpus (im letzteren Fall Vorgehen beim Datenerheben);
+% Darstellung und Begründung der ausgewählten Methode.
+\lipsum[5-6]
+
+
+\section{Hauptteil}
+% Präsentiert die Ergebnisse der Untersuchung; in mehrere Teilkapitel
+% untergliedert, die jeweils aussagekräftige Überschriften enthalten und dem
+% Aufbau der Argumentation folgen.
+
+\subsection{Unterkapitel}
+\lipsum[7]
+
+% Nummerierte Beispiele aus dem Korpus:
+\begin{quoting}
+Dies ist ein nummeriertes Beispiel aus dem Korpus.
+\end{quoting}
+
+\begin{quoting}
+Ein zweites Beispiel.
+\end{quoting}
+
+Auf das letztgenannte Beispiel~(\bspback{}) kann mit \texttt{\textbackslash bspback\{\}} verwiesen werden, auf vorige Beispiele mit \texttt{\textbackslash bspback\{n-zurückliegend\}}, z.\,B. auf Beispiel~(\bspback{1}).
+
+\subsubsection{Unterunterkapitel}
+\lipsum[8]
+
+\subsubsection{Unterunterkapitel}
+\lipsum[9]
+
+\subsection{Unterkapitel}
+\lipsum[10]
+
+\subsubsection{Unterunterkapitel}
+\lipsum[11]
+
+
+\section{Fazit und Ausblick}
+% Zusammenfassung der Ergebnisse mit Rückbezug auf die Leitfrage, die
+% Ausgangshypothese(n), die Problemstellung in pointierter Form, ggf. mit
+% Hinweisen auf weiterführende Fragen.
+\lipsum[12]
+
+
+\section{Bibliographie}
+\printbibliography[heading=none]
+
+\end{document}

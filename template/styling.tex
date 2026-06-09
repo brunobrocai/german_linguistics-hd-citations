@@ -1,0 +1,100 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages for margins, footnotes, and line spacing
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{parskip}
+\usepackage[ngerman]{babel}
+% csquotes: \enquote{...} statt \glqq...\grqq. autostyle folgt babel (-> „…").
+\usepackage[autostyle=true,german=quotes]{csquotes}
+% Aktiviert gerade Anführungszeichen: "Text" wird automatisch zu „Text".
+% (Verschachtelt: "Außen \enquote{innen}" -> „Außen ‚innen'".)
+\MakeOuterQuote{"}
+\usepackage{quoting}
+\usepackage{etoolbox}
+\usepackage{hanging}  % For hanging indentation
+\usepackage{tabto}
+\usepackage{tabularx}    % For tables that automatically fit page width
+\usepackage{makecell}    % For better cell formatting
+\usepackage{array}       % For advanced table features
+\usepackage{booktabs}    % For professional-looking tables
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{mathabx}
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{lipsum}      % Blindtext (\lipsum) -- vor Abgabe entfernen
+
+
+\renewcommand{\arraystretch}{1.5}
+
+% Define a new column type for automatically wrapped and centered content
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{R}[1]{>{\centering\arraybackslash}p{#1}}
+
+% Command for table cell with forced line spacing of 1.0
+\newcommand{\tablecell}[1]{%
+	\begin{tabular}[c]{@{}c@{}}
+		\setstretch{1.0}#1
+	\end{tabular}%
+}
+
+
+%CITATION
+% biblatex auto-loads biblatex.cfg from the project directory (Heidelberg
+% German-linguistics style). Keep biblatex.cfg next to this file.
+\usepackage[backend=biber, style=authoryear]{biblatex}
+\addbibresource{references.bib}
+
+
+% LINE SPACING
+\onehalfspacing
+\sloppy
+
+
+% PARAGRAPH SETTINGS
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{2em}
+
+
+% FOOTNOTE SETTINGS
+\renewcommand{\footnoterule}{%
+	\kern -3pt
+	\hrule width 2in height 0.4pt
+	\kern 2.6pt
+}
+\renewcommand{\footnotesize}{\small}
+\setlength{\footnotesep}{0.0cm}
+
+
+% NUMMERIERTE BEISPIELE
+% Counter for numbered linguistic examples (Beispiele)
+\newcounter{bsp}
+
+% Quoting setup: each quoting environment is prefixed with (1), (2), ...
+\quotingsetup{
+	leftmargin=2cm, rightmargin=1cm, vskip=12pt, font=small,
+	begintext={(\thebsp)\tabto*{0.0cm}},
+}
+% Step the example counter at the start of every quoting environment
+\AtBeginEnvironment{quoting}{%
+	\setlength{\parindent}{-25pt}%
+	\stepcounter{bsp}
+}
+% Reset example numbering at the start of the document
+\AtBeginDocument{\setcounter{bsp}{0}}
+
+% \bspback{n} -> number of the example n positions before the current one
+% (\bspback{} = current example, i.e. n defaults to 0)
+\newcommand{\bspback}[1]{\the\numexpr\value{bsp}-0#1\relax}
+
+% SECTION NUMBER SETTINGS
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\renewcommand{\thetable}{\thesection.\arabic{table}}
